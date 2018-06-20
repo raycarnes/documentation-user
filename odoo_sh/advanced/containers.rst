@@ -14,19 +14,19 @@ as well as common useful packages, are installed.
 
 The Odoo.sh team is open to install any system packages
 as long as they are distributed in the official Ubuntu repositories.
-`Leave us a feedback <https://www.odoo.sh/feedback>`_ if you would like a package not yet installed.
+`Leave us feedback <https://www.odoo.sh/feedback>`_ if you would like us to install a package not yet available.
 
 If your project requires additional Python dependencies, or more recent releases,
 you can define a :file:`requirements.txt` file in the root of your branches listing them.
-The platform will take care to install these dependencies in your containers.
+The platform will install these dependencies in your containers.
 `The pip requirements specifiers <https://pip.pypa.io/en/stable/reference/pip_install/#requirement-specifiers>`_
 documentation can help you write a :file:`requirements.txt` file.
-To have a concrete example,
+To see an example,
 check out the `requirements.txt file of Odoo <https://github.com/odoo/odoo/blob/11.0/requirements.txt>`_.
 
 The :file:`requirements.txt` files of submodules are taken into account as well. The platform
 looks for :file:`requirements.txt` files in each folder containing Odoo modules: Not in the module folder itself,
-but in their parent folder.
+but in the parent folder.
 
 Directory structure
 ===================
@@ -35,7 +35,7 @@ As the containers are Ubuntu based, their directory structure follows the linux 
 `Ubuntu's filesystem tree overview <https://help.ubuntu.com/community/LinuxFilesystemTreeOverview#Main_directories>`_
 explains the main directories.
 
-Here are the Odoo.sh pertinent directories:
+Here are the Odoo.sh relevant directories:
 
 ::
 
@@ -96,13 +96,13 @@ While accessing a container with the shell, you can access the database using *p
 
 **Be careful !**
 `Use transactions <https://www.postgresql.org/docs/current/static/sql-begin.html>`_ (*BEGIN...COMMIT/ROLLBACK*)
-for every *sql* statements leading to changes
+for every DML *sql* statement that would lead to data changes
 (*UPDATE*, *DELETE*, *ALTER*, ...), especially for your production database.
 
-The transaction mechanism is your safety net in case of mistake.
+The transaction mechanism is your safety net in case of a mistake.
 You simply have to rollback your changes to revert your database to its previous state.
 
-For example, it may happen that you forget to set your *WHERE* condition.
+For example, if you forget to set a *WHERE* condition:
 
 .. code-block:: sql
 
@@ -113,7 +113,7 @@ For example, it may happen that you forget to set your *WHERE* condition.
   odoo-addons-master-1=> ROLLBACK;
   ROLLBACK
 
-In such a case, you can rollback to revert the unwanted changes that you just mistakenly did, and rewrite the statement:
+In such a case, you can rollback to revert the unwanted changes, and rewrite the statement:
 
 .. code-block:: sql
 
